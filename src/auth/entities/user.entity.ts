@@ -1,35 +1,42 @@
+import { ApiProperty } from "@nestjs/swagger";
 import { IsBoolean, IsString } from "class-validator";
 import { BeforeInsert, BeforeUpdate, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity({name: 'users'})
+@Entity({ name: 'users' })
 export class User {
 
+    @ApiProperty()
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
+    @ApiProperty()
     @Column({
         type: 'text',
         unique: true
     })
     email: string;
 
+    @ApiProperty()
     @Column({
         type: 'text',
         select: false
     })
     password: string;
 
+    @ApiProperty()
     @Column({
         type: 'text'
     })
     @IsString()
     fullName: string;
 
-    @Column('bool',{
+    @ApiProperty()
+    @Column('bool', {
         default: true
     })
     isActive: boolean;
 
+    @ApiProperty()
     @Column('text', {
         array: true,
         default: ['user']

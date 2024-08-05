@@ -9,7 +9,9 @@ import { ValidRoles } from './interfaces/valid-roles';
 import { UserRoleGuard } from './guards/user-role.guard';
 import { GetUser } from './decorators/get-user.decorator';
 import { Auth } from './decorators/auth.decorator';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('auth')
 @Controller('auth')
 export class AuthController {
 
@@ -22,11 +24,13 @@ export class AuthController {
   }
 
   @Post('login')
+  @ApiResponse({ status: 200, description: 'Login success', type: User })
   login(@Body() loginUserDto: LoginUserDto) {
     return this.authService.login(loginUserDto)
   }
 
   @Get('private')
+  @ApiResponse({ status: 200, description: 'Pasaste' })
   @UseGuards( AuthGuard() )
   testingPrivateRout( ) {
     
